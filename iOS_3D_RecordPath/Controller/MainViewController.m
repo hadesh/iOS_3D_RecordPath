@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "MAMutablePolyline.h"
 #import "MAMutablePolyline.h"
-#import "MAMutablePolylineView.h"
+#import "MAMutablePolylineRenderer.h"
 #import "StatusView.h"
 #import "TipView.h"
 #import "Record.h"
@@ -32,7 +32,7 @@
 
 @property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
 
-@property (nonatomic, strong) MAMutablePolylineView *mutableView;
+@property (nonatomic, strong) MAMutablePolylineRenderer *mutableView;
 
 @property (nonatomic, strong) NSMutableArray *locationsArray;
 
@@ -86,12 +86,11 @@
         [self.mapView setZoomLevel:16 animated:YES];
     }
 }
-
-- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id<MAOverlay>)overlay
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
     if ([overlay isKindOfClass:[MAMutablePolyline class]])
     {
-        MAMutablePolylineView *view = [[MAMutablePolylineView alloc] initWithMutablePolyline:overlay];
+        MAMutablePolylineRenderer *view = [[MAMutablePolylineRenderer alloc] initWithMutablePolyline:overlay];
         view.lineWidth = 8.0;
         view.strokeColor = [UIColor redColor];
         _mutableView = view;

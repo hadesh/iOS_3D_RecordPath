@@ -8,7 +8,7 @@
 //
 
 #import "DisplayViewController.h"
-#import "MAMutablePolylineView.h"
+#import "MAMutablePolylineRenderer.h"
 #import "Record.h"
 
 @interface DisplayViewController()<MAMapViewDelegate>
@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
 
-@property (nonatomic, strong) MAMutablePolylineView *mutableView;
+@property (nonatomic, strong) MAMutablePolylineRenderer *mutableView;
 
 @end
 
@@ -115,11 +115,11 @@
     return nil;
 }
 
-- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id<MAOverlay>)overlay
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
     if ([overlay isKindOfClass:[MAMutablePolyline class]])
     {
-        MAMutablePolylineView *view = [[MAMutablePolylineView alloc] initWithMutablePolyline:overlay];
+        MAMutablePolylineRenderer *view = [[MAMutablePolylineRenderer alloc] initWithMutablePolyline:overlay];
         view.lineWidth = 4.0;
         view.strokeColor = [UIColor redColor];
         

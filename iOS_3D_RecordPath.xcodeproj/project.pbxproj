@@ -20,8 +20,6 @@
 		744F257C1B9460510095CB4F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257B1B9460510095CB4F /* CoreLocation.framework */; };
 		744F257E1B9460580095CB4F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257D1B9460580095CB4F /* CoreTelephony.framework */; };
 		744F25801B94605F0095CB4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257F1B94605F0095CB4F /* SystemConfiguration.framework */; };
-		744F25821B9460660095CB4F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25811B9460660095CB4F /* libz.dylib */; };
-		744F25841B94606D0095CB4F /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25831B94606D0095CB4F /* libstdc++.6.0.9.dylib */; };
 		744F25861B9460720095CB4F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25851B9460720095CB4F /* Security.framework */; };
 		744F258E1B9461210095CB4F /* DisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25891B9461210095CB4F /* DisplayViewController.m */; };
 		744F258F1B9461210095CB4F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F258B1B9461210095CB4F /* MainViewController.m */; };
@@ -32,10 +30,13 @@
 		744F25AB1B94612D0095CB4F /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A01B94612D0095CB4F /* StatusView.m */; };
 		744F25AC1B94612D0095CB4F /* SystemInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A21B94612D0095CB4F /* SystemInfoView.m */; };
 		744F25AD1B94612D0095CB4F /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A41B94612D0095CB4F /* TipView.m */; };
-		744F25AF1B94616F0095CB4F /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25AE1B94616F0095CB4F /* MAMapKit.framework */; };
-		744F25B11B9461830095CB4F /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 744F25B01B9461830095CB4F /* AMap.bundle */; };
 		744F25B81B9465570095CB4F /* MAMutablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B51B9465570095CB4F /* MAMutablePolyline.m */; };
-		744F25B91B9465570095CB4F /* MAMutablePolylineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B71B9465570095CB4F /* MAMutablePolylineView.m */; };
+		744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */; };
+		8197CF711D3E0104007E2812 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF701D3E0104007E2812 /* libz.tbd */; };
+		8197CF731D3E010A007E2812 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF721D3E010A007E2812 /* libc++.tbd */; };
+		8197CF761D3E0116007E2812 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */; };
+		8197CF791D3E0123007E2812 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8197CF781D3E0123007E2812 /* AMap.bundle */; };
+		8197CF7E1D3E0382007E2812 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF7D1D3E0382007E2812 /* MAMapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,8 +68,6 @@
 		744F257B1B9460510095CB4F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		744F257D1B9460580095CB4F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		744F257F1B94605F0095CB4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		744F25811B9460660095CB4F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		744F25831B94606D0095CB4F /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		744F25851B9460720095CB4F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		744F25881B9461210095CB4F /* DisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayViewController.h; sourceTree = "<group>"; };
 		744F25891B9461210095CB4F /* DisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayViewController.m; sourceTree = "<group>"; };
@@ -88,13 +87,16 @@
 		744F25A21B94612D0095CB4F /* SystemInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInfoView.m; sourceTree = "<group>"; };
 		744F25A31B94612D0095CB4F /* TipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipView.h; sourceTree = "<group>"; };
 		744F25A41B94612D0095CB4F /* TipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipView.m; sourceTree = "<group>"; };
-		744F25AE1B94616F0095CB4F /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = iOS_3D_RecordPath/MAMapKit.framework; sourceTree = "<group>"; };
-		744F25B01B9461830095CB4F /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = iOS_3D_RecordPath/MAMapKit.framework/Versions/2.6.1.2c71e1d.110993/Resources/AMap.bundle; sourceTree = "<group>"; };
 		744F25B31B9461CF0095CB4F /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		744F25B41B9465570095CB4F /* MAMutablePolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolyline.h; sourceTree = "<group>"; };
 		744F25B51B9465570095CB4F /* MAMutablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolyline.m; sourceTree = "<group>"; };
-		744F25B61B9465570095CB4F /* MAMutablePolylineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolylineView.h; sourceTree = "<group>"; };
-		744F25B71B9465570095CB4F /* MAMutablePolylineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolylineView.m; sourceTree = "<group>"; };
+		744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolylineRenderer.h; sourceTree = "<group>"; };
+		744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolylineRenderer.m; sourceTree = "<group>"; };
+		8197CF701D3E0104007E2812 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8197CF721D3E010A007E2812 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = iOS_3D_RecordPath/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		8197CF781D3E0123007E2812 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = iOS_3D_RecordPath/MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
+		8197CF7D1D3E0382007E2812 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = iOS_3D_RecordPath/MAMapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +104,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				744F25AF1B94616F0095CB4F /* MAMapKit.framework in Frameworks */,
+				8197CF731D3E010A007E2812 /* libc++.tbd in Frameworks */,
+				8197CF761D3E0116007E2812 /* AMapFoundationKit.framework in Frameworks */,
+				8197CF711D3E0104007E2812 /* libz.tbd in Frameworks */,
 				744F25861B9460720095CB4F /* Security.framework in Frameworks */,
-				744F25841B94606D0095CB4F /* libstdc++.6.0.9.dylib in Frameworks */,
-				744F25821B9460660095CB4F /* libz.dylib in Frameworks */,
 				744F25801B94605F0095CB4F /* SystemConfiguration.framework in Frameworks */,
 				744F257E1B9460580095CB4F /* CoreTelephony.framework in Frameworks */,
 				744F257C1B9460510095CB4F /* CoreLocation.framework in Frameworks */,
@@ -113,6 +115,7 @@
 				744F25781B9460410095CB4F /* QuartzCore.framework in Frameworks */,
 				744F25761B9460380095CB4F /* CoreGraphics.framework in Frameworks */,
 				744F25741B9460310095CB4F /* Foundation.framework in Frameworks */,
+				8197CF7E1D3E0382007E2812 /* MAMapKit.framework in Frameworks */,
 				744F25721B94602C0095CB4F /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,11 +133,12 @@
 		744F253F1B945F950095CB4F = {
 			isa = PBXGroup;
 			children = (
-				744F25B01B9461830095CB4F /* AMap.bundle */,
-				744F25AE1B94616F0095CB4F /* MAMapKit.framework */,
+				8197CF781D3E0123007E2812 /* AMap.bundle */,
+				8197CF721D3E010A007E2812 /* libc++.tbd */,
+				8197CF701D3E0104007E2812 /* libz.tbd */,
+				8197CF7D1D3E0382007E2812 /* MAMapKit.framework */,
+				8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */,
 				744F25851B9460720095CB4F /* Security.framework */,
-				744F25831B94606D0095CB4F /* libstdc++.6.0.9.dylib */,
-				744F25811B9460660095CB4F /* libz.dylib */,
 				744F257F1B94605F0095CB4F /* SystemConfiguration.framework */,
 				744F257D1B9460580095CB4F /* CoreTelephony.framework */,
 				744F257B1B9460510095CB4F /* CoreLocation.framework */,
@@ -231,8 +235,8 @@
 			children = (
 				744F25B41B9465570095CB4F /* MAMutablePolyline.h */,
 				744F25B51B9465570095CB4F /* MAMutablePolyline.m */,
-				744F25B61B9465570095CB4F /* MAMutablePolylineView.h */,
-				744F25B71B9465570095CB4F /* MAMutablePolylineView.m */,
+				744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */,
+				744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */,
 				744F259F1B94612D0095CB4F /* StatusView.h */,
 				744F25A01B94612D0095CB4F /* StatusView.m */,
 				744F25A11B94612D0095CB4F /* SystemInfoView.h */,
@@ -295,7 +299,7 @@
 		744F25401B945F950095CB4F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = FENGSHENG;
 				TargetAttributes = {
 					744F25471B945F950095CB4F = {
@@ -331,7 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				744F25B11B9461830095CB4F /* AMap.bundle in Resources */,
+				8197CF791D3E0123007E2812 /* AMap.bundle in Resources */,
 				744F255C1B945F950095CB4F /* LaunchScreen.xib in Resources */,
 				744F25591B945F950095CB4F /* Images.xcassets in Resources */,
 			);
@@ -352,7 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				744F25511B945F950095CB4F /* AppDelegate.m in Sources */,
-				744F25B91B9465570095CB4F /* MAMutablePolylineView.m in Sources */,
+				744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */,
 				744F25A81B94612D0095CB4F /* SystemInfo.m in Sources */,
 				744F25AB1B94612D0095CB4F /* StatusView.m in Sources */,
 				744F258E1B9461210095CB4F /* DisplayViewController.m in Sources */,
@@ -418,6 +422,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -488,6 +493,7 @@
 				INFOPLIST_FILE = iOS_3D_RecordPath/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -503,6 +509,7 @@
 				INFOPLIST_FILE = iOS_3D_RecordPath/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -521,6 +528,7 @@
 				);
 				INFOPLIST_FILE = iOS_3D_RecordPathTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS_3D_RecordPath.app/iOS_3D_RecordPath";
 			};
@@ -536,6 +544,7 @@
 				);
 				INFOPLIST_FILE = iOS_3D_RecordPathTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS_3D_RecordPath.app/iOS_3D_RecordPath";
 			};
@@ -560,6 +569,7 @@
 				744F256D1B945F950095CB4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		744F256E1B945F950095CB4F /* Build configuration list for PBXNativeTarget "iOS_3D_RecordPathTests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +578,7 @@
 				744F25701B945F950095CB4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

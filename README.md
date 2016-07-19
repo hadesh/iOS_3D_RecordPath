@@ -1,4 +1,6 @@
 路径记录Demo
 ========================
 
-MAMapKit 3D v2.6.1
+
+MAMapKit 2D v4.0.3
+AMapFoundationKit v1.0.0
