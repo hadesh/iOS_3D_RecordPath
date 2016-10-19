@@ -11,16 +11,6 @@
 		744F25511B945F950095CB4F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25501B945F950095CB4F /* AppDelegate.m */; };
 		744F25591B945F950095CB4F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 744F25581B945F950095CB4F /* Images.xcassets */; };
 		744F255C1B945F950095CB4F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 744F255A1B945F950095CB4F /* LaunchScreen.xib */; };
-		744F25681B945F950095CB4F /* iOS_3D_RecordPathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25671B945F950095CB4F /* iOS_3D_RecordPathTests.m */; };
-		744F25721B94602C0095CB4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25711B94602C0095CB4F /* UIKit.framework */; };
-		744F25741B9460310095CB4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25731B9460310095CB4F /* Foundation.framework */; };
-		744F25761B9460380095CB4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25751B9460380095CB4F /* CoreGraphics.framework */; };
-		744F25781B9460410095CB4F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25771B9460410095CB4F /* QuartzCore.framework */; };
-		744F257A1B9460490095CB4F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25791B9460490095CB4F /* OpenGLES.framework */; };
-		744F257C1B9460510095CB4F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257B1B9460510095CB4F /* CoreLocation.framework */; };
-		744F257E1B9460580095CB4F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257D1B9460580095CB4F /* CoreTelephony.framework */; };
-		744F25801B94605F0095CB4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F257F1B94605F0095CB4F /* SystemConfiguration.framework */; };
-		744F25861B9460720095CB4F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 744F25851B9460720095CB4F /* Security.framework */; };
 		744F258E1B9461210095CB4F /* DisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25891B9461210095CB4F /* DisplayViewController.m */; };
 		744F258F1B9461210095CB4F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F258B1B9461210095CB4F /* MainViewController.m */; };
 		744F25901B9461210095CB4F /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F258D1B9461210095CB4F /* RecordViewController.m */; };
@@ -32,22 +22,8 @@
 		744F25AD1B94612D0095CB4F /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A41B94612D0095CB4F /* TipView.m */; };
 		744F25B81B9465570095CB4F /* MAMutablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B51B9465570095CB4F /* MAMutablePolyline.m */; };
 		744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */; };
-		8197CF711D3E0104007E2812 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF701D3E0104007E2812 /* libz.tbd */; };
-		8197CF731D3E010A007E2812 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF721D3E010A007E2812 /* libc++.tbd */; };
-		8197CF761D3E0116007E2812 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */; };
-		8197CF791D3E0123007E2812 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8197CF781D3E0123007E2812 /* AMap.bundle */; };
-		8197CF7E1D3E0382007E2812 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8197CF7D1D3E0382007E2812 /* MAMapKit.framework */; };
+		A4FC031F18B21F92560D7ED6 /* libPods-iOS_3D_RecordPath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9148D4E5E53B183BB90FE701 /* libPods-iOS_3D_RecordPath.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		744F25621B945F950095CB4F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 744F25401B945F950095CB4F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 744F25471B945F950095CB4F;
-			remoteInfo = iOS_3D_RecordPath;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		744F25481B945F950095CB4F /* iOS_3D_RecordPath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_3D_RecordPath.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,18 +33,6 @@
 		744F25501B945F950095CB4F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		744F25581B945F950095CB4F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		744F255B1B945F950095CB4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		744F25611B945F950095CB4F /* iOS_3D_RecordPathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_3D_RecordPathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		744F25661B945F950095CB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		744F25671B945F950095CB4F /* iOS_3D_RecordPathTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_3D_RecordPathTests.m; sourceTree = "<group>"; };
-		744F25711B94602C0095CB4F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		744F25731B9460310095CB4F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		744F25751B9460380095CB4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		744F25771B9460410095CB4F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		744F25791B9460490095CB4F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		744F257B1B9460510095CB4F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		744F257D1B9460580095CB4F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		744F257F1B94605F0095CB4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		744F25851B9460720095CB4F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		744F25881B9461210095CB4F /* DisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayViewController.h; sourceTree = "<group>"; };
 		744F25891B9461210095CB4F /* DisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayViewController.m; sourceTree = "<group>"; };
 		744F258A1B9461210095CB4F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -92,11 +56,9 @@
 		744F25B51B9465570095CB4F /* MAMutablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolyline.m; sourceTree = "<group>"; };
 		744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolylineRenderer.h; sourceTree = "<group>"; };
 		744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolylineRenderer.m; sourceTree = "<group>"; };
-		8197CF701D3E0104007E2812 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		8197CF721D3E010A007E2812 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = iOS_3D_RecordPath/AMapFoundationKit.framework; sourceTree = "<group>"; };
-		8197CF781D3E0123007E2812 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = iOS_3D_RecordPath/MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
-		8197CF7D1D3E0382007E2812 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = iOS_3D_RecordPath/MAMapKit.framework; sourceTree = "<group>"; };
+		9148D4E5E53B183BB90FE701 /* libPods-iOS_3D_RecordPath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS_3D_RecordPath.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9AA142133BBB20AC8299981 /* Pods-iOS_3D_RecordPath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_3D_RecordPath.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath.release.xcconfig"; sourceTree = "<group>"; };
+		E710F864F98182D3E2DCDB7B /* Pods-iOS_3D_RecordPath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_3D_RecordPath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,52 +66,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8197CF731D3E010A007E2812 /* libc++.tbd in Frameworks */,
-				8197CF761D3E0116007E2812 /* AMapFoundationKit.framework in Frameworks */,
-				8197CF711D3E0104007E2812 /* libz.tbd in Frameworks */,
-				744F25861B9460720095CB4F /* Security.framework in Frameworks */,
-				744F25801B94605F0095CB4F /* SystemConfiguration.framework in Frameworks */,
-				744F257E1B9460580095CB4F /* CoreTelephony.framework in Frameworks */,
-				744F257C1B9460510095CB4F /* CoreLocation.framework in Frameworks */,
-				744F257A1B9460490095CB4F /* OpenGLES.framework in Frameworks */,
-				744F25781B9460410095CB4F /* QuartzCore.framework in Frameworks */,
-				744F25761B9460380095CB4F /* CoreGraphics.framework in Frameworks */,
-				744F25741B9460310095CB4F /* Foundation.framework in Frameworks */,
-				8197CF7E1D3E0382007E2812 /* MAMapKit.framework in Frameworks */,
-				744F25721B94602C0095CB4F /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		744F255E1B945F950095CB4F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				A4FC031F18B21F92560D7ED6 /* libPods-iOS_3D_RecordPath.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23139EFBB1B9D9D24CB9431A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E710F864F98182D3E2DCDB7B /* Pods-iOS_3D_RecordPath.debug.xcconfig */,
+				B9AA142133BBB20AC8299981 /* Pods-iOS_3D_RecordPath.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		744F253F1B945F950095CB4F = {
 			isa = PBXGroup;
 			children = (
-				8197CF781D3E0123007E2812 /* AMap.bundle */,
-				8197CF721D3E010A007E2812 /* libc++.tbd */,
-				8197CF701D3E0104007E2812 /* libz.tbd */,
-				8197CF7D1D3E0382007E2812 /* MAMapKit.framework */,
-				8197CF741D3E0116007E2812 /* AMapFoundationKit.framework */,
-				744F25851B9460720095CB4F /* Security.framework */,
-				744F257F1B94605F0095CB4F /* SystemConfiguration.framework */,
-				744F257D1B9460580095CB4F /* CoreTelephony.framework */,
-				744F257B1B9460510095CB4F /* CoreLocation.framework */,
-				744F25791B9460490095CB4F /* OpenGLES.framework */,
-				744F25771B9460410095CB4F /* QuartzCore.framework */,
-				744F25751B9460380095CB4F /* CoreGraphics.framework */,
-				744F25731B9460310095CB4F /* Foundation.framework */,
-				744F25711B94602C0095CB4F /* UIKit.framework */,
 				744F254A1B945F950095CB4F /* iOS_3D_RecordPath */,
-				744F25641B945F950095CB4F /* iOS_3D_RecordPathTests */,
 				744F25491B945F950095CB4F /* Products */,
+				23139EFBB1B9D9D24CB9431A /* Pods */,
+				F792F5A57857337DB2FD7B35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -157,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				744F25481B945F950095CB4F /* iOS_3D_RecordPath.app */,
-				744F25611B945F950095CB4F /* iOS_3D_RecordPathTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,23 +121,6 @@
 				744F25501B945F950095CB4F /* AppDelegate.m */,
 				744F254C1B945F950095CB4F /* Info.plist */,
 				744F254D1B945F950095CB4F /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		744F25641B945F950095CB4F /* iOS_3D_RecordPathTests */ = {
-			isa = PBXGroup;
-			children = (
-				744F25671B945F950095CB4F /* iOS_3D_RecordPathTests.m */,
-				744F25651B945F950095CB4F /* Supporting Files */,
-			);
-			path = iOS_3D_RecordPathTests;
-			sourceTree = "<group>";
-		};
-		744F25651B945F950095CB4F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				744F25661B945F950095CB4F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -255,6 +176,14 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		F792F5A57857337DB2FD7B35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9148D4E5E53B183BB90FE701 /* libPods-iOS_3D_RecordPath.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,9 +191,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 744F256B1B945F950095CB4F /* Build configuration list for PBXNativeTarget "iOS_3D_RecordPath" */;
 			buildPhases = (
+				1F4A8B830B479444DF6999B4 /* [CP] Check Pods Manifest.lock */,
 				744F25441B945F950095CB4F /* Sources */,
 				744F25451B945F950095CB4F /* Frameworks */,
 				744F25461B945F950095CB4F /* Resources */,
+				CA0E0A1071D75706179824D3 /* [CP] Embed Pods Frameworks */,
+				46D855950C3B2E147805F8F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,39 +207,23 @@
 			productReference = 744F25481B945F950095CB4F /* iOS_3D_RecordPath.app */;
 			productType = "com.apple.product-type.application";
 		};
-		744F25601B945F950095CB4F /* iOS_3D_RecordPathTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 744F256E1B945F950095CB4F /* Build configuration list for PBXNativeTarget "iOS_3D_RecordPathTests" */;
-			buildPhases = (
-				744F255D1B945F950095CB4F /* Sources */,
-				744F255E1B945F950095CB4F /* Frameworks */,
-				744F255F1B945F950095CB4F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				744F25631B945F950095CB4F /* PBXTargetDependency */,
-			);
-			name = iOS_3D_RecordPathTests;
-			productName = iOS_3D_RecordPathTests;
-			productReference = 744F25611B945F950095CB4F /* iOS_3D_RecordPathTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		744F25401B945F950095CB4F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = FENGSHENG;
 				TargetAttributes = {
 					744F25471B945F950095CB4F = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					744F25601B945F950095CB4F = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 744F25471B945F950095CB4F;
+						DevelopmentTeam = YMJ372W38W;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -325,7 +241,6 @@
 			projectRoot = "";
 			targets = (
 				744F25471B945F950095CB4F /* iOS_3D_RecordPath */,
-				744F25601B945F950095CB4F /* iOS_3D_RecordPathTests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,20 +250,60 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8197CF791D3E0123007E2812 /* AMap.bundle in Resources */,
 				744F255C1B945F950095CB4F /* LaunchScreen.xib in Resources */,
 				744F25591B945F950095CB4F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		744F255F1B945F950095CB4F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1F4A8B830B479444DF6999B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXResourcesBuildPhase section */
+		46D855950C3B2E147805F8F1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA0E0A1071D75706179824D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		744F25441B945F950095CB4F /* Sources */ = {
@@ -371,23 +326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		744F255D1B945F950095CB4F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				744F25681B945F950095CB4F /* iOS_3D_RecordPathTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		744F25631B945F950095CB4F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 744F25471B945F950095CB4F /* iOS_3D_RecordPath */;
-			targetProxy = 744F25621B945F950095CB4F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		744F255A1B945F950095CB4F /* LaunchScreen.xib */ = {
@@ -414,8 +353,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -458,8 +399,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -484,69 +427,37 @@
 		};
 		744F256C1B945F950095CB4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E710F864F98182D3E2DCDB7B /* Pods-iOS_3D_RecordPath.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YMJ372W38W;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iOS_3D_RecordPath",
 				);
 				INFOPLIST_FILE = iOS_3D_RecordPath/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.autonavi.iOS-3D-RecordPath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		744F256D1B945F950095CB4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9AA142133BBB20AC8299981 /* Pods-iOS_3D_RecordPath.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YMJ372W38W;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/iOS_3D_RecordPath",
 				);
 				INFOPLIST_FILE = iOS_3D_RecordPath/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.autonavi.iOS-3D-RecordPath";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		744F256F1B945F950095CB4F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = iOS_3D_RecordPathTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS_3D_RecordPath.app/iOS_3D_RecordPath";
-			};
-			name = Debug;
-		};
-		744F25701B945F950095CB4F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = iOS_3D_RecordPathTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Peking.1401210730.FengSheng.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOS_3D_RecordPath.app/iOS_3D_RecordPath";
 			};
 			name = Release;
 		};
@@ -567,15 +478,6 @@
 			buildConfigurations = (
 				744F256C1B945F950095CB4F /* Debug */,
 				744F256D1B945F950095CB4F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		744F256E1B945F950095CB4F /* Build configuration list for PBXNativeTarget "iOS_3D_RecordPathTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				744F256F1B945F950095CB4F /* Debug */,
-				744F25701B945F950095CB4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

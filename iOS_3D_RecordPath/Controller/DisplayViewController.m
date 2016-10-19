@@ -105,8 +105,7 @@
         {
             poiAnnotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
         }
-        
-        poiAnnotationView.animatesDrop = YES;
+        poiAnnotationView.pinColor = MAPinAnnotationColorGreen;
         poiAnnotationView.canShowCallout = YES;
         
         return poiAnnotationView;
@@ -185,7 +184,7 @@
     
     double heading = [self coordinateHeadingFrom:preCoord To:nextCoord];
     CLLocationDistance distance = MAMetersBetweenMapPoints(MAMapPointForCoordinate(nextCoord), MAMapPointForCoordinate(preCoord));
-    NSTimeInterval duration = distance / (self.averageSpeed * 100);
+    NSTimeInterval duration = distance / (self.averageSpeed * 10);
     
     [UIView animateWithDuration:duration
                      animations:^{

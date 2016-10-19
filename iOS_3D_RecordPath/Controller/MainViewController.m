@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "MAMutablePolyline.h"
-#import "MAMutablePolyline.h"
 #import "MAMutablePolylineRenderer.h"
 #import "StatusView.h"
 #import "TipView.h"
@@ -83,7 +82,6 @@
     else
     {
         [self.locationBtn setImage:self.imageLocated forState:UIControlStateNormal];
-        [self.mapView setZoomLevel:16 animated:YES];
     }
 }
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
@@ -181,13 +179,6 @@
     [self.view addSubview:self.statusView];
 }
 
-- (void)initSystemInfoView
-{
-    self.systemInfoView = [[SystemInfoView alloc] initWithFrame:CGRectMake(5, 35 + 150 + 10, 150, 140)];
-    
-    [self.view addSubview:self.systemInfoView];
-}
-
 - (void)initTipView
 {
     self.locationsArray = [[NSMutableArray alloc] init];
@@ -200,12 +191,16 @@
 - (void)initMapView
 {
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
-    
-    /* set the mapview location config */
-    self.mapView.showsUserLocation = true;
+    self.mapView.zoomLevel = 16.0;
     self.mapView.distanceFilter = 10;
     self.mapView.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     self.mapView.pausesLocationUpdatesAutomatically = NO;
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0)
+    {
+        self.mapView.allowsBackgroundLocationUpdates = YES;
+    }
+    
     
     self.mapView.delegate = self;
     
@@ -216,7 +211,7 @@
 {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_play.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(actionRecordAndStop)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_play.png"] style:UIBarButtonItemStylePlain target:self action:@selector(actionRecordAndStop)];
     
     UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"clear" style:UIBarButtonItemStylePlain target:self action:@selector(actionClear)];
     UIBarButtonItem *listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(actionShowList)];
@@ -262,8 +257,6 @@
     [self initOverlay];
     
     [self initStatusView];
-    
-    [self initSystemInfoView];
     
     [self initTipView];
     

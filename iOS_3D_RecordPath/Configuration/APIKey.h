@@ -11,7 +11,7 @@
 
 /* 使用高德地图API，请注册Key，注册地址：http://lbs.amap.com/console/key */
 
-const static NSString *APIKey = @"6a8f921bbfa2814af31946348482d6f1";
+const static NSString *APIKey = @"";
 
 
 #endif
