@@ -17,7 +17,7 @@
 
 @property (nonatomic, assign) double distance;
 
-@property (nonatomic, assign) CLLocationCoordinate2D * coords;
+@property (nonatomic, assign) CLLocationCoordinate2D *coords;
 
 @end
 

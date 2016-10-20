@@ -22,6 +22,10 @@
 		744F25AD1B94612D0095CB4F /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A41B94612D0095CB4F /* TipView.m */; };
 		744F25B81B9465570095CB4F /* MAMutablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B51B9465570095CB4F /* MAMutablePolyline.m */; };
 		744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */; };
+		81F8106B1DB89BA900D4804D /* CACoordLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810641DB89BA900D4804D /* CACoordLayer.m */; };
+		81F8106C1DB89BA900D4804D /* MovingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810661DB89BA900D4804D /* MovingAnnotationView.m */; };
+		81F8106D1DB89BA900D4804D /* TracingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810681DB89BA900D4804D /* TracingPoint.m */; };
+		81F8106E1DB89BA900D4804D /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F8106A1DB89BA900D4804D /* Util.m */; };
 		A4FC031F18B21F92560D7ED6 /* libPods-iOS_3D_RecordPath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9148D4E5E53B183BB90FE701 /* libPods-iOS_3D_RecordPath.a */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +60,14 @@
 		744F25B51B9465570095CB4F /* MAMutablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolyline.m; sourceTree = "<group>"; };
 		744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolylineRenderer.h; sourceTree = "<group>"; };
 		744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolylineRenderer.m; sourceTree = "<group>"; };
+		81F810631DB89BA900D4804D /* CACoordLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACoordLayer.h; sourceTree = "<group>"; };
+		81F810641DB89BA900D4804D /* CACoordLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACoordLayer.m; sourceTree = "<group>"; };
+		81F810651DB89BA900D4804D /* MovingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAnnotationView.h; sourceTree = "<group>"; };
+		81F810661DB89BA900D4804D /* MovingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAnnotationView.m; sourceTree = "<group>"; };
+		81F810671DB89BA900D4804D /* TracingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracingPoint.h; sourceTree = "<group>"; };
+		81F810681DB89BA900D4804D /* TracingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracingPoint.m; sourceTree = "<group>"; };
+		81F810691DB89BA900D4804D /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		81F8106A1DB89BA900D4804D /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		9148D4E5E53B183BB90FE701 /* libPods-iOS_3D_RecordPath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS_3D_RecordPath.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9AA142133BBB20AC8299981 /* Pods-iOS_3D_RecordPath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_3D_RecordPath.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath.release.xcconfig"; sourceTree = "<group>"; };
 		E710F864F98182D3E2DCDB7B /* Pods-iOS_3D_RecordPath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS_3D_RecordPath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS_3D_RecordPath/Pods-iOS_3D_RecordPath.debug.xcconfig"; sourceTree = "<group>"; };
@@ -154,6 +166,7 @@
 		744F259A1B94612D0095CB4F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81F8106F1DB89BAF00D4804D /* MovingAnnotationView */,
 				744F25B41B9465570095CB4F /* MAMutablePolyline.h */,
 				744F25B51B9465570095CB4F /* MAMutablePolyline.m */,
 				744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */,
@@ -174,6 +187,21 @@
 				744F25B31B9461CF0095CB4F /* APIKey.h */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		81F8106F1DB89BAF00D4804D /* MovingAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				81F810631DB89BA900D4804D /* CACoordLayer.h */,
+				81F810641DB89BA900D4804D /* CACoordLayer.m */,
+				81F810651DB89BA900D4804D /* MovingAnnotationView.h */,
+				81F810661DB89BA900D4804D /* MovingAnnotationView.m */,
+				81F810671DB89BA900D4804D /* TracingPoint.h */,
+				81F810681DB89BA900D4804D /* TracingPoint.m */,
+				81F810691DB89BA900D4804D /* Util.h */,
+				81F8106A1DB89BA900D4804D /* Util.m */,
+			);
+			name = MovingAnnotationView;
 			sourceTree = "<group>";
 		};
 		F792F5A57857337DB2FD7B35 /* Frameworks */ = {
@@ -270,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		46D855950C3B2E147805F8F1 /* [CP] Copy Pods Resources */ = {
@@ -310,6 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81F8106E1DB89BA900D4804D /* Util.m in Sources */,
 				744F25511B945F950095CB4F /* AppDelegate.m in Sources */,
 				744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */,
 				744F25A81B94612D0095CB4F /* SystemInfo.m in Sources */,
@@ -321,8 +350,11 @@
 				744F258F1B9461210095CB4F /* MainViewController.m in Sources */,
 				744F25901B9461210095CB4F /* RecordViewController.m in Sources */,
 				744F25B81B9465570095CB4F /* MAMutablePolyline.m in Sources */,
+				81F8106D1DB89BA900D4804D /* TracingPoint.m in Sources */,
 				744F25AC1B94612D0095CB4F /* SystemInfoView.m in Sources */,
 				744F25A51B94612D0095CB4F /* FileHelper.m in Sources */,
+				81F8106C1DB89BA900D4804D /* MovingAnnotationView.m in Sources */,
+				81F8106B1DB89BA900D4804D /* CACoordLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

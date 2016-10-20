@@ -10,8 +10,15 @@
 #import "DisplayViewController.h"
 #import "MAMutablePolylineRenderer.h"
 #import "Record.h"
+#import "MovingAnnotationView.h"
+#import "TracingPoint.h"
+#import "Util.h"
 
 @interface DisplayViewController()<MAMapViewDelegate>
+{
+    NSMutableArray *_tracking;
+    CFTimeInterval _duration;
+}
 
 @property (nonatomic, strong) Record *record;
 
@@ -20,14 +27,6 @@
 @property (nonatomic, strong) MAPointAnnotation *myLocation;
 
 @property (nonatomic, assign) BOOL isPlaying;
-
-@property (nonatomic, assign) double averageSpeed;
-
-@property (nonatomic, assign) NSInteger currentLocationIndex;
-
-@property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
-
-@property (nonatomic, strong) MAMutablePolylineRenderer *mutableView;
 
 @end
 
@@ -53,26 +52,28 @@
     endPoint.coordinate = [self.record endLocation].coordinate;
     endPoint.title = @"end";
     [self.mapView addAnnotation:endPoint];
+
+    MAPolyline *polyline = [MAPolyline polylineWithCoordinates:self.record.coordinates count:self.record.numOfLocations];
+    [self.mapView addOverlay:polyline];
     
-    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < self.record.numOfLocations; i++)
-    {
-        NSValue *value = [NSValue valueWithMAMapPoint:MAMapPointForCoordinate(self.record.coordinates[i])];
-        [mutableArray addObject:value];
-    }
-    
-    self.mutablePolyline = [[MAMutablePolyline alloc] initWithPoints:mutableArray];
-    [self.mapView addOverlay:self.mutablePolyline];
     [self.mapView showAnnotations:self.mapView.annotations animated:YES];
     
-    self.averageSpeed = [self.record totalDistance] / [self.record totalDuration];
+    [self initTrackingWithCoords:self.record.coordinates count:self.record.numOfLocations];
 }
 
 #pragma mark - Interface
 
 - (void)setRecord:(Record *)record
 {
+    if (_record == record)
+    {
+        return;
+    }
+    
+    [self actionPlayAndStop];
+    
     _record = record;
+    _duration = _record.totalDuration / 10.0;
 }
 
 #pragma mark - mapViewDelegate
@@ -83,16 +84,16 @@
         
         static NSString *annotationIdentifier = @"myLcoationIdentifier";
         
-        MAAnnotationView *poiAnnotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
-        if (poiAnnotationView == nil)
+        MovingAnnotationView *annotationView = (MovingAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+        if (annotationView == nil)
         {
-            poiAnnotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
+            annotationView = [[MovingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
         }
         
-        poiAnnotationView.image = [UIImage imageNamed:@"aeroplane.png"];
-        poiAnnotationView.canShowCallout = NO;
+        annotationView.image = [UIImage imageNamed:@"aeroplane.png"];
+        annotationView.canShowCallout = NO;
         
-        return poiAnnotationView;
+        return annotationView;
     }
     
     if ([annotation isKindOfClass:[MAPointAnnotation class]])
@@ -116,9 +117,9 @@
 
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
-    if ([overlay isKindOfClass:[MAMutablePolyline class]])
+    if ([overlay isKindOfClass:[MAPolyline class]])
     {
-        MAMutablePolylineRenderer *view = [[MAMutablePolylineRenderer alloc] initWithMutablePolyline:overlay];
+        MAPolylineRenderer *view = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
         view.lineWidth = 4.0;
         view.strokeColor = [UIColor redColor];
         
@@ -149,7 +150,9 @@
             [self.mapView addAnnotation:self.myLocation];
         }
         
-        [self animateToNextCoordinate];
+        MovingAnnotationView * carView = (MovingAnnotationView *)[self.mapView viewForAnnotation:self.myLocation];
+        [carView addTrackingAnimationForPoints:_tracking duration:_duration];
+
     }
     else
     {
@@ -162,68 +165,6 @@
             [view.layer removeAllAnimations];
         }
     }
-}
-
-- (void)animateToNextCoordinate
-{
-    if (self.myLocation == nil)
-    {
-        return;
-    }
-    
-    CLLocationCoordinate2D *coordinates = [self.record coordinates];
-    if (self.currentLocationIndex == [self.record numOfLocations] )
-    {
-        self.currentLocationIndex = 0;
-        [self actionPlayAndStop];
-        return;
-    }
-    
-    CLLocationCoordinate2D nextCoord = coordinates[self.currentLocationIndex];
-    CLLocationCoordinate2D preCoord = self.currentLocationIndex == 0 ? nextCoord : self.myLocation.coordinate;
-    
-    double heading = [self coordinateHeadingFrom:preCoord To:nextCoord];
-    CLLocationDistance distance = MAMetersBetweenMapPoints(MAMapPointForCoordinate(nextCoord), MAMapPointForCoordinate(preCoord));
-    NSTimeInterval duration = distance / (self.averageSpeed * 10);
-    
-    [UIView animateWithDuration:duration
-                     animations:^{
-                        self.myLocation.coordinate = nextCoord;}
-                     completion:^(BOOL finished){
-                         self.currentLocationIndex++;
-                         if (finished)
-                         {
-                             [self animateToNextCoordinate];
-                         }}];
-    MAAnnotationView *view = [self.mapView viewForAnnotation:self.myLocation];
-    if (view != nil)
-    {
-        view.transform = CGAffineTransformMakeRotation((CGFloat)(heading/180.0*M_PI));
-    }
-}
-
-- (double)coordinateHeadingFrom:(CLLocationCoordinate2D)head To:(CLLocationCoordinate2D)rear
-{
-    if (!CLLocationCoordinate2DIsValid(head) || !CLLocationCoordinate2DIsValid(rear))
-    {
-        return 0.0;
-    }
-
-    double delta_lat_y = rear.latitude - head.latitude;
-    double delta_lon_x = rear.longitude - head.longitude;
-    
-    if (fabs(delta_lat_y) < 0.000001)
-    {
-        return delta_lon_x < 0.0 ? 270.0 : 90.0;
-    }
-    
-    double heading = atan2(delta_lon_x, delta_lat_y) / M_PI * 180.0;
-    
-    if (heading < 0.0)
-    {
-        heading += 360.0;
-    }
-    return heading;
 }
 
 #pragma mark - Initialazation
@@ -243,12 +184,23 @@
     [self.view addSubview:self.mapView];
 }
 
-- (void)initVariates
+- (void)initTrackingWithCoords:(CLLocationCoordinate2D *)coords count:(NSUInteger)count
 {
-    self.isPlaying = NO;
-    self.currentLocationIndex = 0;
-    self.averageSpeed = 2;
+    _tracking = [NSMutableArray array];
+    for (int i = 0; i<count - 1; i++)
+    {
+        TracingPoint * tp = [[TracingPoint alloc] init];
+        tp.coordinate = coords[i];
+        tp.course = [Util calculateCourseFromCoordinate:coords[i] to:coords[i+1]];
+        [_tracking addObject:tp];
+    }
+    
+    TracingPoint * tp = [[TracingPoint alloc] init];
+    tp.coordinate = coords[count - 1];
+    tp.course = ((TracingPoint *)[_tracking lastObject]).course;
+    [_tracking addObject:tp];
 }
+
 
 #pragma mark - Life Cycle
 
@@ -263,8 +215,6 @@
     [self initToolBar];
     
     [self showRoute];
-    
-    [self initVariates];
 }
 
 @end
