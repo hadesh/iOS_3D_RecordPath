@@ -41,8 +41,16 @@
 
 - (void)addTrackingAnimationForPoints:(NSArray *)points duration:(CFTimeInterval)duration
 {
+    if (self.mapView == nil)
+    {
+        NSLog(@"mapview is needed for the animation");
+        
+        return;
+    }
+    
     if (![points count])
     {
+        NSLog(@"points is empty");
         return;
     }
     
@@ -228,6 +236,14 @@
         {
             [self popFrontAnimationForKey:RotationAnimationKey];
         }
+        
+        if (self.animationList.count == 0)
+        {
+            if ([self.animationDelegate respondsToSelector:@selector(didMovingAnnotationStop:)])
+            {
+                [self.animationDelegate didMovingAnnotationStop:self];
+            }
+        }
 
     }
 }
@@ -249,11 +265,6 @@
         _animationList = [NSMutableArray array];
     }
     return _animationList;
-}
-
-- (MAMapView *)mapView
-{
-    return (MAMapView*)(self.superview.superview);
 }
 
 #pragma mark - Override

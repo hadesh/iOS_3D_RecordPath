@@ -116,20 +116,27 @@
     else
     {
         self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"icon_play.png"];
-        [self.tipView showTip:@"has stoppod recording"];
+        [self.tipView showTip:@"recording stoppod"];
     }
 }
 
-- (void)actionClear
+- (void)actionSave
 {
     self.isRecording = NO;
     [self.locationsArray removeAllObjects];
     self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"icon_play.png"];
-    [self.tipView showTip:@"has stoppod recording"];
-    [self saveRoute];
+    
+    
+    if ([self saveRoute])
+    {
+        [self.tipView showTip:@"recording save succeeded"];
+    }
+    else
+    {
+        [self.tipView showTip:@"recording save failed"];
+    }
 
     [self.mutablePolyline removeAllPoints];
-    
     [self.mutableView referenceDidChange];
 }
 
@@ -147,7 +154,7 @@
 
 - (void)actionShowList
 {
-    UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *recordController = [[RecordViewController alloc] init];
     recordController.title = @"Records";
     
     [self.navigationController pushViewController:recordController animated:YES];
@@ -155,19 +162,20 @@
 
 #pragma mark - Utility
 
-- (void)saveRoute
+- (BOOL)saveRoute
 {
-    if (self.currentRecord == nil)
+    if (self.currentRecord == nil || self.currentRecord.numOfLocations < 2)
     {
-        return;
+        return NO;
     }
     
     NSString *name = self.currentRecord.title;
     NSString *path = [FileHelper filePathWithName:name];
     
-    [NSKeyedArchiver archiveRootObject:self.currentRecord toFile:path];
-    
+    BOOL result = [NSKeyedArchiver archiveRootObject:self.currentRecord toFile:path];
     self.currentRecord = nil;
+    
+    return result;
 }
 
 #pragma mark - Initialization
@@ -201,7 +209,7 @@
         self.mapView.allowsBackgroundLocationUpdates = YES;
     }
     
-    
+    self.mapView.showsIndoorMap = NO;
     self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
@@ -213,10 +221,10 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_play.png"] style:UIBarButtonItemStylePlain target:self action:@selector(actionRecordAndStop)];
     
-    UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"clear" style:UIBarButtonItemStylePlain target:self action:@selector(actionClear)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(actionSave)];
     UIBarButtonItem *listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(actionShowList)];
     
-    NSArray *array = [[NSArray alloc] initWithObjects:listButton, clearButton, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:listButton, saveButton, nil];
     self.navigationItem.rightBarButtonItems = array;
     
     self.isRecording = NO;
@@ -232,10 +240,10 @@
     self.imageLocated = [UIImage imageNamed:@"location_yes.png"];
     self.imageNotLocate = [UIImage imageNamed:@"location_no.png"];
     
-    self.locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetHeight(self.view.bounds)*0.8, 50, 50)];
+    self.locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetHeight(self.view.bounds) - 90, 40, 40)];
     self.locationBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     self.locationBtn.backgroundColor = [UIColor whiteColor];
-    self.locationBtn.layer.cornerRadius = 5;
+    self.locationBtn.layer.cornerRadius = 3;
     [self.locationBtn addTarget:self action:@selector(actionLocation) forControlEvents:UIControlEventTouchUpInside];
     [self.locationBtn setImage:self.imageNotLocate forState:UIControlStateNormal];
     

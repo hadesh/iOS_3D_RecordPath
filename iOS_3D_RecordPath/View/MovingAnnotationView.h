@@ -9,10 +9,23 @@
 #import <MAMapKit/MAMapKit.h>
 #import "TracingPoint.h"
 
+@class MovingAnnotationView;
+
+@protocol MovingAnnotationViewDelegate <NSObject>
+
+@optional
+
+- (void)didMovingAnnotationStop:(MovingAnnotationView *)view;
+
+@end
+
 /**
  动画AnnotationView，只试用于高德3D地图SDK。
  */
 @interface MovingAnnotationView : MAAnnotationView
+
+@property (nonatomic, weak) MAMapView *mapView;
+@property (nonatomic, weak) id<MovingAnnotationViewDelegate> animationDelegate;
 
 /*!
  @brief 添加动画

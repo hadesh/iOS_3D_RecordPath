@@ -14,7 +14,7 @@
 #import "TracingPoint.h"
 #import "Util.h"
 
-@interface DisplayViewController()<MAMapViewDelegate>
+@interface DisplayViewController()<MAMapViewDelegate, MovingAnnotationViewDelegate>
 {
     NSMutableArray *_tracking;
     CFTimeInterval _duration;
@@ -70,10 +70,23 @@
         return;
     }
     
-    [self actionPlayAndStop];
+    if (self.isPlaying)
+    {
+        [self actionPlayAndStop];
+    }
     
     _record = record;
-    _duration = _record.totalDuration / 10.0;
+    _duration = 5;//_record.totalDuration / 10.0;
+}
+
+#pragma mark - movingAnnotationViewDelegate
+
+- (void)didMovingAnnotationStop:(MovingAnnotationView *)view
+{
+    if (self.isPlaying)
+    {
+        [self actionPlayAndStop];
+    }
 }
 
 #pragma mark - mapViewDelegate
@@ -130,6 +143,11 @@
 
 #pragma mark - Action
 
+- (void)actionTrace
+{
+    
+}
+
 - (void)actionPlayAndStop
 {
     if (self.record == nil)
@@ -151,6 +169,8 @@
         }
         
         MovingAnnotationView * carView = (MovingAnnotationView *)[self.mapView viewForAnnotation:self.myLocation];
+        carView.mapView = self.mapView;
+        carView.animationDelegate = self;
         [carView addTrackingAnimationForPoints:_tracking duration:_duration];
 
     }
@@ -159,7 +179,6 @@
         self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:@"icon_play.png"];
         
         MAAnnotationView *view = [self.mapView viewForAnnotation:self.myLocation];
-        
         if (view != nil)
         {
             [view.layer removeAllAnimations];
@@ -180,7 +199,7 @@
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.mapView.delegate = self;
-    
+    self.mapView.showsIndoorMap = NO;
     [self.view addSubview:self.mapView];
 }
 
@@ -200,7 +219,6 @@
     tp.course = ((TracingPoint *)[_tracking lastObject]).course;
     [_tracking addObject:tp];
 }
-
 
 #pragma mark - Life Cycle
 
