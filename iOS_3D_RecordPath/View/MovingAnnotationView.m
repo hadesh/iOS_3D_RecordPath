@@ -162,6 +162,100 @@
 
 }
 
+- (void)addTrackingAnimationIgnoringCourseForPoints:(NSArray *)points duration:(CFTimeInterval)duration
+{
+    if (self.mapView == nil)
+    {
+        NSLog(@"mapview is needed for the animation");
+        
+        return;
+    }
+    
+    if (![points count])
+    {
+        NSLog(@"points is empty");
+        return;
+    }
+    
+    CACoordLayer * mylayer = ((CACoordLayer *)self.layer);
+    
+    //preparing
+    NSUInteger num = [points count];
+    NSMutableArray *xvalues = [NSMutableArray arrayWithCapacity:num];
+    NSMutableArray *yvalues = [NSMutableArray arrayWithCapacity:num];
+    
+    NSMutableArray *times = [NSMutableArray arrayWithCapacity:num];
+    
+    double sumOfDistance = 0.f;
+    double *dis = malloc(([points count]) * sizeof(double));
+    
+    MAMapPoint preLoc;
+    
+    MAMapPoint firstPoint = MAMapPointForCoordinate(((TracingPoint *)[points firstObject]).coordinate);
+    
+    preLoc = firstPoint;
+    
+    [xvalues addObject:@(preLoc.x)];
+    [yvalues addObject:@(preLoc.y)];
+    [times addObject:@(0.f)];
+
+    //set the animation points.
+    for (int i = 0; i<[points count]; i++)
+    {
+        TracingPoint * tp = points[i];
+        
+        //position
+        MAMapPoint p = MAMapPointForCoordinate(tp.coordinate);
+        [xvalues addObjectsFromArray:@[@(p.x)]];//stop for turn
+        [yvalues addObjectsFromArray:@[@(p.y)]];
+
+        //distance
+        dis[i] = MAMetersBetweenMapPoints(p, preLoc);
+        sumOfDistance = sumOfDistance + dis[i];
+        dis[i] = sumOfDistance;
+        
+        //record pre
+        preLoc = p;
+//        preDir = currDir;
+    }
+
+    for (int i = 0; i<[points count]; i++)
+    {
+        double end = dis[i]/sumOfDistance;
+        [times addObjectsFromArray:@[@(end)]];
+    }
+    
+    //record the destination.
+    TracingPoint * last = [points lastObject];
+    lastDestination = MAMapPointForCoordinate(last.coordinate);
+    lastDirection = last.course;
+    
+    free(dis);
+    
+    // add animation.
+    CAKeyframeAnimation *xanimation = [CAKeyframeAnimation animationWithKeyPath:MapXAnimationKey];
+    xanimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    xanimation.values   = xvalues;
+    xanimation.keyTimes = times;
+    xanimation.duration = duration;
+    xanimation.delegate = self;
+    xanimation.fillMode = kCAFillModeForwards;
+    
+    CAKeyframeAnimation *yanimation = [CAKeyframeAnimation animationWithKeyPath:MapYAnimationKey];
+    yanimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    yanimation.values   = yvalues;
+    yanimation.keyTimes = times;
+    yanimation.duration = duration;
+    yanimation.delegate = self;
+    yanimation.fillMode = kCAFillModeForwards;
+    
+    
+    [self pushBackAnimation:xanimation];
+    [self pushBackAnimation:yanimation];
+    
+    mylayer.mapView = [self mapView];
+}
+
 - (void)pushBackAnimation:(CAPropertyAnimation *)anim
 {
     [self.animationList addObject:anim];

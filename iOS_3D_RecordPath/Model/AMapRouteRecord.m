@@ -6,25 +6,35 @@
 //  Copyright (c) 2015年 FENGSHENG. All rights reserved.
 //
 
-#import "Record.h"
+#import "AMapRouteRecord.h"
 
-@interface Record()<NSCoding>
+@interface AMapRouteRecord()<NSCoding>
 
 @property (nonatomic, strong) NSDate *startTime;
 @property (nonatomic, strong) NSDate *endTime;
 
-@property (nonatomic, strong) NSMutableArray *locationsArray;
-
-@property (nonatomic, assign) double distance;
+@property (nonatomic, strong) NSMutableArray<CLLocation *> *locationsArray;
+@property (nonatomic, strong) NSMutableArray<MATracePoint *> *tracedLocationsArray;
 
 @property (nonatomic, assign) CLLocationCoordinate2D *coords;
 
 @end
 
 
-@implementation Record
+@implementation AMapRouteRecord
 
 #pragma mark - interface
+
+- (void)updateTracedLocations:(NSArray<MATracePoint *> *)tracedLocations
+{
+    [self.tracedLocationsArray addObjectsFromArray:tracedLocations];
+}
+
+- (void)addLocation:(CLLocation *)location
+{
+    _endTime = [NSDate date];
+    [self.locationsArray addObject:location];
+}
 
 - (CLLocation *)startLocation
 {
@@ -34,12 +44,6 @@
 - (CLLocation *)endLocation
 {
     return [self.locationsArray lastObject];
-}
-
-- (void)addLocation:(CLLocation *)location
-{
-    _endTime = [NSDate date];
-    [self.locationsArray addObject:location];
 }
 
 - (CLLocationCoordinate2D *)coordinates
@@ -61,6 +65,16 @@
     return self.coords;
 }
 
+- (NSArray<CLLocation *> *)locations
+{
+    return [self.locationsArray copy];
+}
+
+- (NSArray<MATracePoint *> *)tracedLocations
+{
+    return [self.tracedLocationsArray copy];
+}
+
 - (NSString *)title
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -72,7 +86,7 @@
 
 - (NSString *)subTitle
 {
-    return [NSString stringWithFormat:@"point:%ld, distance: %.2fm, duration: %.2fs", self.locationsArray.count, [self totalDistance], [self totalDuration]];
+    return [NSString stringWithFormat:@"point:%d, distance: %.2fm, duration: %.2fs", @(self.locationsArray.count).intValue, [self totalDistance], [self totalDuration]];
 }
 
 - (CLLocationDistance)totalDistance
@@ -112,6 +126,8 @@
         self.startTime = [aDecoder decodeObjectForKey:@"startTime"];
         self.endTime = [aDecoder decodeObjectForKey:@"endTime"];
         self.locationsArray = [aDecoder decodeObjectForKey:@"locations"];
+        self.tracedLocationsArray = [aDecoder decodeObjectForKey:@"tracedLocationsArray"];
+        
     }
     
     return self;
@@ -122,6 +138,7 @@
     [aCoder encodeObject:self.startTime forKey:@"startTime"];
     [aCoder encodeObject:self.endTime forKey:@"endTime"];
     [aCoder encodeObject:self.locationsArray forKey:@"locations"];
+    [aCoder encodeObject:self.tracedLocationsArray forKey:@"tracedLocationsArray"];
 }
 
 #pragma mark - Life Cycle
@@ -134,6 +151,8 @@
         _startTime = [NSDate date];
         _endTime = _startTime;
         _locationsArray = [[NSMutableArray alloc] init];
+        _tracedLocationsArray = [[NSMutableArray alloc] init];
+        
     }
     
     return self;

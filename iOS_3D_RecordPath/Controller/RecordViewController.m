@@ -8,7 +8,7 @@
 
 #import "RecordViewController.h"
 #import "DisplayViewController.h"
-#import "Record.h"
+#import "AMapRouteRecord.h"
 #import "FileHelper.h"
 
 @interface RecordViewController()<UITableViewDataSource,UITableViewDelegate>
@@ -67,7 +67,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
     }
     
-    Record *record = self.recordArray[indexPath.row];
+    AMapRouteRecord *record = self.recordArray[indexPath.row];
     
     cell.textLabel.text = [record title];
     cell.detailTextLabel.text = [record subTitle];

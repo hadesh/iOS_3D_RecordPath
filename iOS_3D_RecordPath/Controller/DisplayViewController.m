@@ -9,7 +9,7 @@
 
 #import "DisplayViewController.h"
 #import "MAMutablePolylineRenderer.h"
-#import "Record.h"
+#import "AMapRouteRecord.h"
 #import "MovingAnnotationView.h"
 #import "TracingPoint.h"
 #import "Util.h"
@@ -20,7 +20,7 @@
     CFTimeInterval _duration;
 }
 
-@property (nonatomic, strong) Record *record;
+@property (nonatomic, strong) AMapRouteRecord *record;
 
 @property (nonatomic, strong) MAMapView *mapView;
 
@@ -43,27 +43,14 @@
         NSLog(@"invaled route");
     }
     
-    MAPointAnnotation *startPoint = [[MAPointAnnotation alloc] init];
-    startPoint.coordinate = [self.record startLocation].coordinate;
-    startPoint.title = @"start";
-    [self.mapView addAnnotation:startPoint];
-    
-    MAPointAnnotation *endPoint = [[MAPointAnnotation alloc] init];
-    endPoint.coordinate = [self.record endLocation].coordinate;
-    endPoint.title = @"end";
-    [self.mapView addAnnotation:endPoint];
+    [self initDisplayRoutePolyline];
 
-    MAPolyline *polyline = [MAPolyline polylineWithCoordinates:self.record.coordinates count:self.record.numOfLocations];
-    [self.mapView addOverlay:polyline];
-    
-    [self.mapView showAnnotations:self.mapView.annotations animated:YES];
-    
-    [self initTrackingWithCoords:self.record.coordinates count:self.record.numOfLocations];
+    [self initDisplayTrackingCoords];
 }
 
 #pragma mark - Interface
 
-- (void)setRecord:(Record *)record
+- (void)setRecord:(AMapRouteRecord *)record
 {
     if (_record == record)
     {
@@ -76,7 +63,7 @@
     }
     
     _record = record;
-    _duration = 5;//_record.totalDuration / 10.0;
+    _duration = _record.totalDuration / 1.0;
 }
 
 #pragma mark - movingAnnotationViewDelegate
@@ -103,7 +90,7 @@
             annotationView = [[MovingAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
         }
         
-        annotationView.image = [UIImage imageNamed:@"aeroplane.png"];
+        annotationView.image = [UIImage imageNamed:@"car"];
         annotationView.canShowCallout = NO;
         
         return annotationView;
@@ -141,12 +128,15 @@
     return nil;
 }
 
-#pragma mark - Action
-
-- (void)actionTrace
+- (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
 {
-    
+    if (view.annotation == self.myLocation)
+    {
+        [mapView selectAnnotation:self.myLocation animated:NO];
+    }
 }
+
+#pragma mark - Action
 
 - (void)actionPlayAndStop
 {
@@ -166,12 +156,15 @@
             self.myLocation.coordinate = [self.record startLocation].coordinate;
             
             [self.mapView addAnnotation:self.myLocation];
+            
+            // 选中myLocation，不会被重用移除。
+            [self.mapView selectAnnotation:self.myLocation animated:NO];
         }
         
         MovingAnnotationView * carView = (MovingAnnotationView *)[self.mapView viewForAnnotation:self.myLocation];
         carView.mapView = self.mapView;
         carView.animationDelegate = self;
-        [carView addTrackingAnimationForPoints:_tracking duration:_duration];
+        [carView addTrackingAnimationIgnoringCourseForPoints:_tracking duration:_duration];
 
     }
     else
@@ -203,21 +196,68 @@
     [self.view addSubview:self.mapView];
 }
 
-- (void)initTrackingWithCoords:(CLLocationCoordinate2D *)coords count:(NSUInteger)count
+- (void)initDisplayRoutePolyline
 {
+    NSArray<MATracePoint *> *tracePoints = self.record.tracedLocations;
+    
+    if (tracePoints.count < 2)
+    {
+        return;
+    }
+    
+    MAPointAnnotation *startPoint = [[MAPointAnnotation alloc] init];
+    startPoint.coordinate = CLLocationCoordinate2DMake(tracePoints.firstObject.latitude, tracePoints.firstObject.longitude);
+    startPoint.title = @"start";
+    [self.mapView addAnnotation:startPoint];
+    
+    MAPointAnnotation *endPoint = [[MAPointAnnotation alloc] init];
+    endPoint.coordinate = CLLocationCoordinate2DMake(tracePoints.lastObject.latitude, tracePoints.lastObject.longitude);
+    endPoint.title = @"end";
+    [self.mapView addAnnotation:endPoint];
+    
+    CLLocationCoordinate2D *coords = (CLLocationCoordinate2D *)malloc(tracePoints.count * sizeof(CLLocationCoordinate2D));
+    
+    for (int i = 0; i < tracePoints.count; i++)
+    {
+        coords[i] = CLLocationCoordinate2DMake(tracePoints[i].latitude, tracePoints[i].longitude);
+    }
+    
+    MAPolyline *polyline = [MAPolyline polylineWithCoordinates:coords count:tracePoints.count];
+    [self.mapView addOverlay:polyline];
+    
+    [self.mapView showOverlays:self.mapView.overlays edgePadding:UIEdgeInsetsMake(30, 50, 30, 50) animated:NO];
+    
+    if (coords)
+    {
+        free(coords);
+    }
+
+}
+
+- (void)initDisplayTrackingCoords
+{
+    NSArray<MATracePoint *> *points = self.record.tracedLocations;
+    
+    if (points.count < 2)
+    {
+        return;
+    }
+    
     _tracking = [NSMutableArray array];
-    for (int i = 0; i<count - 1; i++)
+    for (int i = 0; i < points.count - 1; i++)
     {
         TracingPoint * tp = [[TracingPoint alloc] init];
-        tp.coordinate = coords[i];
-        tp.course = [Util calculateCourseFromCoordinate:coords[i] to:coords[i+1]];
+        tp.coordinate = CLLocationCoordinate2DMake(points[i].latitude, points[i].longitude);
+//        tp.course = [Util calculateCourseFromCoordinate:CLLocationCoordinate2DMake(points[i].latitude, points[i].longitude) to:CLLocationCoordinate2DMake(points[i+1].latitude, points[i+1].longitude)];
+        
+        NSLog(@"tp.course :%f", tp.course);
         [_tracking addObject:tp];
     }
     
-    TracingPoint * tp = [[TracingPoint alloc] init];
-    tp.coordinate = coords[count - 1];
-    tp.course = ((TracingPoint *)[_tracking lastObject]).course;
-    [_tracking addObject:tp];
+    TracingPoint *lastTp = [[TracingPoint alloc] init];
+    lastTp.coordinate = CLLocationCoordinate2DMake(points.lastObject.latitude, points.lastObject.longitude);
+    lastTp.course = ((TracingPoint *)[_tracking lastObject]).course;
+    [_tracking addObject:lastTp];
 }
 
 #pragma mark - Life Cycle

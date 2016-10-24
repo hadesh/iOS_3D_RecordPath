@@ -34,4 +34,8 @@
  */
 - (void)addTrackingAnimationForPoints:(NSArray *)points duration:(CFTimeInterval)duration;
 
+
+/// 忽略转向
+- (void)addTrackingAnimationIgnoringCourseForPoints:(NSArray *)points duration:(CFTimeInterval)duration;
+
 @end

@@ -11,7 +11,7 @@
 #import "MAMutablePolylineRenderer.h"
 #import "StatusView.h"
 #import "TipView.h"
-#import "Record.h"
+#import "AMapRouteRecord.h"
 #import "FileHelper.h"
 #import "RecordViewController.h"
 #import "SystemInfoView.h"
@@ -19,6 +19,8 @@
 @interface MainViewController()
 
 @property (nonatomic, strong) MAMapView *mapView;
+@property (nonatomic, strong) MATraceManager *traceManager;
+
 
 @property (nonatomic, strong) StatusView *statusView;
 @property (nonatomic, strong) TipView *tipView;
@@ -28,6 +30,7 @@
 @property (nonatomic, strong) SystemInfoView *systemInfoView;
 
 @property (nonatomic, assign) BOOL isRecording;
+@property (atomic, assign) BOOL isSaving;
 
 @property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
 
@@ -35,7 +38,11 @@
 
 @property (nonatomic, strong) NSMutableArray *locationsArray;
 
-@property (nonatomic, strong) Record *currentRecord;
+@property (nonatomic, strong) AMapRouteRecord *currentRecord;
+
+@property (nonatomic, strong) NSMutableArray *tracedPolylines;
+@property (nonatomic, strong) NSMutableArray *tempTraceLocations;
+@property (nonatomic, assign) double totalTraceLength;
 
 @end
 
@@ -51,25 +58,43 @@
         return;
     }
     
-    if (self.isRecording)
+    if (!self.isRecording)
     {
-        if (userLocation.location.horizontalAccuracy < 80 && userLocation.location.horizontalAccuracy > 0)
+        return;
+    }
+    
+    if (userLocation.location.horizontalAccuracy < 100 && userLocation.location.horizontalAccuracy > 0)
+    {
+        double lastDis = [userLocation.location distanceFromLocation:self.currentRecord.endLocation];
+        
+        if (lastDis < 0.0 || lastDis > 10)
         {
             [self.locationsArray addObject:userLocation.location];
             
-            NSLog(@"date: %@,now :%@",userLocation.location.timestamp,[NSDate date]);
+            //            NSLog(@"date: %@,now :%@",userLocation.location.timestamp, [NSDate date]);
             [self.tipView showTip:[NSString stringWithFormat:@"has got %ld locations",self.locationsArray.count]];
             
             [self.currentRecord addLocation:userLocation.location];
             
-            [self.mutablePolyline appendPoint: MAMapPointForCoordinate(userLocation.location.coordinate)];
             
+            [self.mutablePolyline appendPoint: MAMapPointForCoordinate(userLocation.location.coordinate)];
+            [self.mutableView referenceDidChange];
             [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
             
-            [self.mutableView referenceDidChange];
+            
+            // trace
+            [self.tempTraceLocations addObject:userLocation.location];
+            if (self.tempTraceLocations.count >= 30)
+            {
+                [self queryTraceWithLocations:self.tempTraceLocations withSaving:NO];
+                [self.tempTraceLocations removeAllObjects];
+                
+                // 把最后一个再add一遍，否则会有缝隙
+                [self.tempTraceLocations addObject:userLocation.location];
+            }
         }
     }
-        
+    
     [self.statusView showStatusWith:userLocation.location];
 }
 
@@ -89,11 +114,20 @@
     if ([overlay isKindOfClass:[MAMutablePolyline class]])
     {
         MAMutablePolylineRenderer *view = [[MAMutablePolylineRenderer alloc] initWithMutablePolyline:overlay];
-        view.lineWidth = 8.0;
+        view.lineWidth = 5.0;
         view.strokeColor = [UIColor redColor];
         _mutableView = view;
         return view;
     }
+    
+    if ([overlay isKindOfClass:[MAPolyline class]])
+    {
+        MAPolylineRenderer *view = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
+        view.lineWidth = 10.0;
+        view.strokeColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.5];
+        return view;
+    }
+    
     return nil;
 }
 
@@ -101,6 +135,12 @@
 
 - (void)actionRecordAndStop
 {
+    if (self.isSaving)
+    {
+        NSLog(@"保存结果中。。。");
+        return;
+    }
+    
     self.isRecording = !self.isRecording;
     
     if (self.isRecording)
@@ -110,34 +150,34 @@
         
         if (self.currentRecord == nil)
         {
-            self.currentRecord = [[Record alloc] init];
+            self.currentRecord = [[AMapRouteRecord alloc] init];
         }
+        
+        [self setBackgroundModeEnable:YES];
     }
     else
     {
         self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"icon_play.png"];
         [self.tipView showTip:@"recording stoppod"];
+        
+        [self setBackgroundModeEnable:NO];
+        
+        [self actionSave];
     }
 }
 
 - (void)actionSave
 {
     self.isRecording = NO;
+    self.isSaving = YES;
     [self.locationsArray removeAllObjects];
-    self.navigationItem.leftBarButtonItem.image = [UIImage imageNamed:@"icon_play.png"];
-    
-    
-    if ([self saveRoute])
-    {
-        [self.tipView showTip:@"recording save succeeded"];
-    }
-    else
-    {
-        [self.tipView showTip:@"recording save failed"];
-    }
 
     [self.mutablePolyline removeAllPoints];
     [self.mutableView referenceDidChange];
+    
+    // 全程请求trace
+    [self.mapView removeOverlays:self.tracedPolylines];
+    [self queryTraceWithLocations:self.currentRecord.locations withSaving:YES];
 }
 
 - (void)actionLocation
@@ -162,6 +202,110 @@
 
 #pragma mark - Utility
 
+- (void)setBackgroundModeEnable:(BOOL)enable
+{
+    self.mapView.pausesLocationUpdatesAutomatically = !enable;
+    
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0)
+    {
+        self.mapView.allowsBackgroundLocationUpdates = enable;
+    }
+}
+
+- (void)queryTraceWithLocations:(NSArray<CLLocation *> *)locations withSaving:(BOOL)saving
+{
+    NSMutableArray *mArr = [NSMutableArray array];
+    for(CLLocation *loc in locations)
+    {
+        MATraceLocation *tLoc = [[MATraceLocation alloc] init];
+        tLoc.loc = loc.coordinate;
+        
+        tLoc.speed = loc.speed * 3.6; //m/s  转 km/h
+        tLoc.time = [loc.timestamp timeIntervalSince1970] * 1000;
+        tLoc.angle = loc.course;
+        [mArr addObject:tLoc];
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    __unused NSOperation *op = [self.traceManager queryProcessedTraceWith:mArr type:-1 processingCallback:nil  finishCallback:^(NSArray<MATracePoint *> *points, double distance) {
+        
+        NSLog(@"trace query done!");
+        
+        if (saving) {
+            weakSelf.totalTraceLength = 0.0;
+            [weakSelf.currentRecord updateTracedLocations:points];
+            weakSelf.isSaving = NO;
+            
+            if ([weakSelf saveRoute])
+            {
+                [weakSelf.tipView showTip:@"recording save succeeded"];
+            }
+            else
+            {
+                [weakSelf.tipView showTip:@"recording save failed"];
+            }
+        }
+        
+        [weakSelf updateUserlocationTitleWithDistance:distance];
+        [weakSelf addFullTrace:points];
+        
+    } failedCallback:^(int errorCode, NSString *errorDesc) {
+        
+        NSLog(@"query trace point failed :%@", errorDesc);
+        if (saving) {
+            weakSelf.isSaving = NO;
+        }
+    }];
+
+}
+
+- (void)addFullTrace:(NSArray<MATracePoint*> *)tracePoints
+{
+    MAPolyline *polyline = [self makePolylineWith:tracePoints];
+    if(!polyline)
+    {
+        return;
+    }
+    
+    [self.tracedPolylines addObject:polyline];
+    [self.mapView addOverlay:polyline];
+}
+
+- (MAPolyline *)makePolylineWith:(NSArray<MATracePoint*> *)tracePoints
+{
+    if(tracePoints.count < 2)
+    {
+        return nil;
+    }
+    
+    CLLocationCoordinate2D *pCoords = malloc(sizeof(CLLocationCoordinate2D) * tracePoints.count);
+    if(!pCoords) {
+        return nil;
+    }
+    
+    for(int i = 0; i < tracePoints.count; ++i) {
+        MATracePoint *p = [tracePoints objectAtIndex:i];
+        CLLocationCoordinate2D *pCur = pCoords + i;
+        pCur->latitude = p.latitude;
+        pCur->longitude = p.longitude;
+    }
+    
+    MAPolyline *polyline = [MAPolyline polylineWithCoordinates:pCoords count:tracePoints.count];
+    
+    if(pCoords)
+    {
+        free(pCoords);
+    }
+    
+    return polyline;
+}
+
+- (void)updateUserlocationTitleWithDistance:(double)distance
+{
+    self.totalTraceLength += distance;
+    self.mapView.userLocation.title = [NSString stringWithFormat:@"距离：%.0f 米", self.totalTraceLength];
+}
+
 - (BOOL)saveRoute
 {
     if (self.currentRecord == nil || self.currentRecord.numOfLocations < 2)
@@ -173,7 +317,6 @@
     NSString *path = [FileHelper filePathWithName:name];
     
     BOOL result = [NSKeyedArchiver archiveRootObject:self.currentRecord toFile:path];
-    self.currentRecord = nil;
     
     return result;
 }
@@ -200,19 +343,14 @@
 {
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.zoomLevel = 16.0;
-    self.mapView.distanceFilter = 10;
     self.mapView.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-    self.mapView.pausesLocationUpdatesAutomatically = NO;
-    
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0)
-    {
-        self.mapView.allowsBackgroundLocationUpdates = YES;
-    }
     
     self.mapView.showsIndoorMap = NO;
     self.mapView.delegate = self;
     
     [self.view addSubview:self.mapView];
+    
+    self.traceManager = [[MATraceManager alloc] init];
 }
 
 - (void)initNavigationBar
@@ -221,13 +359,14 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_play.png"] style:UIBarButtonItemStylePlain target:self action:@selector(actionRecordAndStop)];
     
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(actionSave)];
     UIBarButtonItem *listButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_list"] style:UIBarButtonItemStylePlain target:self action:@selector(actionShowList)];
     
-    NSArray *array = [[NSArray alloc] initWithObjects:listButton, saveButton, nil];
+    NSArray *array = [[NSArray alloc] initWithObjects:listButton, nil];
     self.navigationItem.rightBarButtonItems = array;
     
     self.isRecording = NO;
+    
+    self.isSaving = NO;
 }
 
 - (void)initOverlay
@@ -269,6 +408,10 @@
     [self initTipView];
     
     [self initLocationButton];
+    
+    self.tracedPolylines = [NSMutableArray array];
+    self.tempTraceLocations = [NSMutableArray array];
+    self.totalTraceLength = 0.0;
 }
 
 - (void)viewDidAppear:(BOOL)animated

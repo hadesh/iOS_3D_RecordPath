@@ -15,13 +15,15 @@
 		744F258F1B9461210095CB4F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F258B1B9461210095CB4F /* MainViewController.m */; };
 		744F25901B9461210095CB4F /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F258D1B9461210095CB4F /* RecordViewController.m */; };
 		744F25A51B94612D0095CB4F /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25931B94612D0095CB4F /* FileHelper.m */; };
-		744F25A71B94612D0095CB4F /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25971B94612D0095CB4F /* Record.m */; };
+		744F25A71B94612D0095CB4F /* AMapRouteRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25971B94612D0095CB4F /* AMapRouteRecord.m */; };
 		744F25A81B94612D0095CB4F /* SystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25991B94612D0095CB4F /* SystemInfo.m */; };
 		744F25AB1B94612D0095CB4F /* StatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A01B94612D0095CB4F /* StatusView.m */; };
 		744F25AC1B94612D0095CB4F /* SystemInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A21B94612D0095CB4F /* SystemInfoView.m */; };
 		744F25AD1B94612D0095CB4F /* TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25A41B94612D0095CB4F /* TipView.m */; };
 		744F25B81B9465570095CB4F /* MAMutablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B51B9465570095CB4F /* MAMutablePolyline.m */; };
 		744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */; };
+		814D1E871DBDED4E00D604DD /* MATracePoint+Coding.m in Sources */ = {isa = PBXBuildFile; fileRef = 814D1E861DBDED4E00D604DD /* MATracePoint+Coding.m */; };
+		814D1E891DBDF28A00D604DD /* car@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 814D1E881DBDF28A00D604DD /* car@2x.png */; };
 		81F8106B1DB89BA900D4804D /* CACoordLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810641DB89BA900D4804D /* CACoordLayer.m */; };
 		81F8106C1DB89BA900D4804D /* MovingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810661DB89BA900D4804D /* MovingAnnotationView.m */; };
 		81F8106D1DB89BA900D4804D /* TracingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 81F810681DB89BA900D4804D /* TracingPoint.m */; };
@@ -45,8 +47,8 @@
 		744F258D1B9461210095CB4F /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		744F25921B94612D0095CB4F /* FileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHelper.h; sourceTree = "<group>"; };
 		744F25931B94612D0095CB4F /* FileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHelper.m; sourceTree = "<group>"; };
-		744F25961B94612D0095CB4F /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
-		744F25971B94612D0095CB4F /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		744F25961B94612D0095CB4F /* AMapRouteRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMapRouteRecord.h; sourceTree = "<group>"; };
+		744F25971B94612D0095CB4F /* AMapRouteRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMapRouteRecord.m; sourceTree = "<group>"; };
 		744F25981B94612D0095CB4F /* SystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInfo.h; sourceTree = "<group>"; };
 		744F25991B94612D0095CB4F /* SystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInfo.m; sourceTree = "<group>"; };
 		744F259F1B94612D0095CB4F /* StatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusView.h; sourceTree = "<group>"; };
@@ -60,6 +62,9 @@
 		744F25B51B9465570095CB4F /* MAMutablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolyline.m; sourceTree = "<group>"; };
 		744F25B61B9465570095CB4F /* MAMutablePolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMutablePolylineRenderer.h; sourceTree = "<group>"; };
 		744F25B71B9465570095CB4F /* MAMutablePolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolylineRenderer.m; sourceTree = "<group>"; };
+		814D1E851DBDED4E00D604DD /* MATracePoint+Coding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MATracePoint+Coding.h"; sourceTree = "<group>"; };
+		814D1E861DBDED4E00D604DD /* MATracePoint+Coding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MATracePoint+Coding.m"; sourceTree = "<group>"; };
+		814D1E881DBDF28A00D604DD /* car@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car@2x.png"; sourceTree = "<group>"; };
 		81F810631DB89BA900D4804D /* CACoordLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACoordLayer.h; sourceTree = "<group>"; };
 		81F810641DB89BA900D4804D /* CACoordLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACoordLayer.m; sourceTree = "<group>"; };
 		81F810651DB89BA900D4804D /* MovingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAnnotationView.h; sourceTree = "<group>"; };
@@ -120,6 +125,7 @@
 				744F259A1B94612D0095CB4F /* View */,
 				744F25B21B9461CF0095CB4F /* Configuration */,
 				744F25581B945F950095CB4F /* Images.xcassets */,
+				814D1E881DBDF28A00D604DD /* car@2x.png */,
 				744F255A1B945F950095CB4F /* LaunchScreen.xib */,
 				744F254B1B945F950095CB4F /* Supporting Files */,
 			);
@@ -155,10 +161,12 @@
 			children = (
 				744F25921B94612D0095CB4F /* FileHelper.h */,
 				744F25931B94612D0095CB4F /* FileHelper.m */,
-				744F25961B94612D0095CB4F /* Record.h */,
-				744F25971B94612D0095CB4F /* Record.m */,
+				744F25961B94612D0095CB4F /* AMapRouteRecord.h */,
+				744F25971B94612D0095CB4F /* AMapRouteRecord.m */,
 				744F25981B94612D0095CB4F /* SystemInfo.h */,
 				744F25991B94612D0095CB4F /* SystemInfo.m */,
+				814D1E851DBDED4E00D604DD /* MATracePoint+Coding.h */,
+				814D1E861DBDED4E00D604DD /* MATracePoint+Coding.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				814D1E891DBDF28A00D604DD /* car@2x.png in Resources */,
 				744F255C1B945F950095CB4F /* LaunchScreen.xib in Resources */,
 				744F25591B945F950095CB4F /* Images.xcassets in Resources */,
 			);
@@ -343,9 +352,10 @@
 				744F25B91B9465570095CB4F /* MAMutablePolylineRenderer.m in Sources */,
 				744F25A81B94612D0095CB4F /* SystemInfo.m in Sources */,
 				744F25AB1B94612D0095CB4F /* StatusView.m in Sources */,
+				814D1E871DBDED4E00D604DD /* MATracePoint+Coding.m in Sources */,
 				744F258E1B9461210095CB4F /* DisplayViewController.m in Sources */,
 				744F25AD1B94612D0095CB4F /* TipView.m in Sources */,
-				744F25A71B94612D0095CB4F /* Record.m in Sources */,
+				744F25A71B94612D0095CB4F /* AMapRouteRecord.m in Sources */,
 				744F254E1B945F950095CB4F /* main.m in Sources */,
 				744F258F1B9461210095CB4F /* MainViewController.m in Sources */,
 				744F25901B9461210095CB4F /* RecordViewController.m in Sources */,

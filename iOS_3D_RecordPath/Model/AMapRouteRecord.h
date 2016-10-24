@@ -7,23 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MAMapKit/MATraceManager.h>
+
 @import CoreLocation;
 
-@interface Record : NSObject
+@interface AMapRouteRecord : NSObject
+@property (nonatomic, readonly) NSArray<CLLocation *> *locations;
+@property (nonatomic, readonly) NSArray<MATracePoint *> *tracedLocations;
 
 - (NSString *)title;
-
 - (NSString *)subTitle;
 
+- (void)updateTracedLocations:(NSArray<MATracePoint *> *)tracedLocations;
+
 - (void)addLocation:(CLLocation *)location;
+
+- (CLLocationCoordinate2D *)coordinates;
 
 - (NSInteger)numOfLocations;
 
 - (CLLocation *)startLocation;
 
 - (CLLocation *)endLocation;
-
-- (CLLocationCoordinate2D *)coordinates;
 
 - (CLLocationDistance)totalDistance;
 

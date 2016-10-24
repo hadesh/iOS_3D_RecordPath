@@ -8,7 +8,7 @@
 //
 
 #import "FileHelper.h"
-#import "Record.h"
+#import "AMapRouteRecord.h"
 
 @implementation FileHelper
 
@@ -29,8 +29,19 @@
         for (NSString *fileName in fileArray)
         {
             NSString *recordPath = [path stringByAppendingPathComponent:fileName];
-            Record *record = [NSKeyedUnarchiver unarchiveObjectWithFile:recordPath];
-            [records addObject:record];
+            
+            @try {
+                AMapRouteRecord *record = [NSKeyedUnarchiver unarchiveObjectWithFile:recordPath];
+                [records addObject:record];
+                
+            } @catch (NSException *exception) {
+                NSLog(@"exception :%@", exception);
+                [[NSFileManager defaultManager] removeItemAtPath:recordPath error:nil];
+                
+            } @finally {
+                
+            }
+            
         }
         return [NSMutableArray arrayWithArray:records];
     }

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapKit.h>
-#import "Record.h"
+#import "AMapRouteRecord.h"
 
 @interface DisplayViewController : UIViewController
 
-- (void)setRecord:(Record *)record;
+- (void)setRecord:(AMapRouteRecord *)record;
 
 @end
