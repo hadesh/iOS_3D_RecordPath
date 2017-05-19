@@ -1,3 +1,6 @@
+此工程后续不再更新，请参考： https://github.com/amap-demo/iOS-path-record 
+
+
 本工程为基于高德地图iOS SDK进行封装，实现了定位轨迹记录并回放的功能
 ## 前述 ##
 - [高德官网申请Key](http://lbs.amap.com/dev/#/).
